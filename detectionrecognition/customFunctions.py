@@ -12,7 +12,7 @@ glass_cas = cv2.CascadeClassifier('Haar/haarcascade_eye_tree_eyeglasses.xml')
 WHITE = [255, 255, 255]
 
 def FileRead():
-    Info = open("Names.txt", "r")                       # Open th text file in readmode
+    Info = open("./Dataset/Names.txt", "r")                       # Open the text file in readmode
     NAME = []                                           # The tuple to store Names
     while (True):                                       # Read all the lines in the file and store them in two tuples
         Line = Info.readline()
@@ -25,8 +25,6 @@ def FileRead():
 Names = FileRead()                                 # Run the above Function to get the ID and Names Tuple
 
 #     ------------------- FUNCTION TO FIND THE NAME  -----------------------------------------------------------
-
-
 def ID2Name(ID, conf):
     if ID > 0:
         NameString = "Name: " + Names[ID-1] + " Distance: " + (str(round(conf)) )                                # Find the Name using the index of the ID
@@ -36,11 +34,9 @@ def ID2Name(ID, conf):
     return NameString
 
 #     ------------------- THIS FUNCTION READ THE FILE AND ADD THE NAME TO THE END OF THE FILE  -----------------
-
-
 def AddName():
-    Name = raw_input('Enter Your Name ')
-    Info = open("Names.txt", "r+")
+    Name = input('Enter Your Name: ')
+    Info = open("./Dataset/Names.txt", "r+")
     ID = ((sum(1 for line in Info))+1)
     Info.write(str(ID) + "," + Name + "\n")
     print ("Name Stored in " + str(ID))
@@ -48,8 +44,6 @@ def AddName():
     return ID
 
 #     ------------------- DRAW THE BOX AROUND THE FACE, ID and CONFIDENCE  -------------------------------------
-
-
 def DispID(x, y, w, h, NAME, Image):
 
     #  --------------------------------- THE POSITION OF THE ID BOX  ---------------------------------------------
@@ -75,15 +69,9 @@ def DispID(x, y, w, h, NAME, Image):
 
 
 def draw_box(Image, x, y, w, h):
-    cv2.line(Image, (x, y), (x + (w/5) ,y), WHITE, 2)
-    cv2.line(Image, (x+((w/5)*4), y), (x+w, y), WHITE, 2)
-    cv2.line(Image, (x, y), (x, y+(h/5)), WHITE, 2)
-    cv2.line(Image, (x+w, y), (x+w, y+(h/5)), WHITE, 2)
-    cv2.line(Image, (x, (y+(h/5*4))), (x, y+h), WHITE, 2)
-    cv2.line(Image, (x, (y+h)), (x + (w/5) ,y+h), WHITE, 2)
-    cv2.line(Image, (x+((w/5)*4), y+h), (x + w, y + h), WHITE, 2)
-    cv2.line(Image, (x+w, (y+(h/5*4))), (x+w, y+h), WHITE, 2)
-
+    start_pt = (x, y)
+    end_pt = (x+w, y+h)
+    cv2.rectangle(Image, start_pt, end_pt, WHITE, 2)
 
 # ---------------     SECOND ID BOX      ----------------------
 def DispID2(x, y, w, h, NAME, Image):
