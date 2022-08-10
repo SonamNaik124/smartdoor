@@ -8,7 +8,6 @@ from PIL import Image                                   # importing Image librar
 
 EigenFace = cv2.face.createEigenFaceRecognizer(15)      # creating EIGEN FACE RECOGNISER
 FisherFace = cv2.face.createFisherFaceRecognizer(2)     # Create FISHER FACE RECOGNISER
-LBPHFace = cv2.face.createLBPHFaceRecognizer(1, 1, 7,7) # Create LBPH FACE RECOGNISER
 
 path = 'dataSet'                                        # path to the photos
 def getImageWithID (path):
@@ -32,14 +31,10 @@ print('TRAINING......')
 EigenFace.train(FaceList, IDs)                          # The recongniser is trained using the images
 print('EIGEN FACE RECOGNISER COMPLETE...')
 EigenFace.save('Recogniser/trainingDataEigan.xml')
-print('FILE SAVED..')
+print('Eigen Face XML saved...')
 FisherFace.train(FaceList, IDs)
 print('FISHER FACE RECOGNISER COMPLETE...')
 FisherFace.save('Recogniser/trainingDataFisher.xml')
 print('Fisher Face XML saved... ')
-LBPHFace.train(FaceList, IDs)
-print('LBPH FACE RECOGNISER COMPLETE...')
-LBPHFace.save('Recogniser/trainingDataLBPH.xml')
-print ('ALL XML FILES SAVED...')
 
-cv2.destroyAllWindows()
+cv2.destroyAllWindows() 

@@ -6,12 +6,9 @@ import os                                               # importing the OS for p
 import cv2                                              # importing the OpenCV library
 import numpy as np                                      # importing Numpy library
 from PIL import Image                                   # importing Image library
-import matplotlib.pyplot as plt
-import NameFind
 
-face_cascade = cv2.CascadeClassifier('Haar/haarcascade_frontalcatface.xml')
-path = 'dataSet'                                        # path to the photos
-img = cv2.imread('Me4.jpg')
+EigenFace = cv2.createEigenFaceRecognizer(15)           # Creating eigen face recognizer
+ 
 
 def getImageWithID (path):
     imagePaths = [os.path.join(path, f) for f in os.listdir(path)]
